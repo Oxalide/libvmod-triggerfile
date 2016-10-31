@@ -1,11 +1,12 @@
-libvmod-triggerfile (0.2) unstable; urgency=medium
+libvmod-triggerfile-3.0.7 (2) stable; urgency=low
 
-  * Packaging bump, no changes.
+  * packaging rework
+  * no code modification
 
- -- Lasse Karstensen <lkarsten@varnish-software.com>  Mon, 03 Nov 2014 11:05:13 +0100
+ -- Maxime de Roucy <maxime.deroucy@oxalide.com>  Mon, 31 Oct 2016 18:42:00 +0200
 
-libvmod-triggerfile (0.1) unstable; urgency=low
+libvmod-triggerfile-3.0.7 (1) stable; urgency=low
 
-  * First version
+  * First version (from vmod-example)
 
- -- Lasse Karstensen <lasse@varnish-software.com>  Wed, 19 Sep 2012 15:03:00 +0200
+ -- Maxime de Roucy <maxime.deroucy@oxalide.com>  Mon, 30 May 2016 23:35:00 +0200
