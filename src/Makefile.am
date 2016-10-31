@@ -19,17 +19,8 @@ vcc_if.c: vcc_if.h
 vcc_if.h: @VMODTOOL@ $(top_srcdir)/src/vmod_triggerfile.vcc
 	@VMODTOOL@ $(top_srcdir)/src/vmod_triggerfile.vcc
 
-VMOD_TESTS = $(top_srcdir)/src/tests/*.vtc
-.PHONY: $(VMOD_TESTS)
-
-$(top_srcdir)/src/tests/*.vtc: libvmod_triggerfile.la
-	@VARNISHTEST@ -Dvarnishd=@VARNISHD@ -Dvmod_topbuild=$(abs_top_builddir) $@
-
-check: $(VMOD_TESTS)
-
 EXTRA_DIST = \
-	vmod_triggerfile.vcc \
-	$(VMOD_TESTS)
+	vmod_triggerfile.vcc
 
 CLEANFILES = \
 	$(builddir)/vcc_if.c \
