@@ -14,15 +14,5 @@ dist_man_MANS = vmod_triggerfile.3
 
 @BUILD_VMOD_TRIGGERFILE@
 
-AM_TESTS_ENVIRONMENT = \
-	PATH="$(VMOD_TEST_PATH)" \
-	LD_LIBRARY_PATH="$(VARNISH_LIBRARY_PATH)"
-TEST_EXTENSIONS = .vtc
-VTC_LOG_COMPILER = varnishtest -v
-AM_VTC_LOG_FLAGS = -Dvmod_triggerfile="$(VMOD_TRIGGERFILE)"
-
-TESTS = @VMOD_TESTS@
-
 EXTRA_DIST = \
-	vmod_triggerfile.vcc \
-	$(VMOD_TESTS)
+	vmod_triggerfile.vcc
