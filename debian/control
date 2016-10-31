@@ -10,3 +10,4 @@ Package: libvmod-triggerfile-3.0.7
 Architecture: any
 Depends: varnish, ${Varnish:ABI}, ${misc:Depends}, ${shlibs:Depends}
 Description: Triggerfile vmod for Varnish
+ Test if a file exist an return a boolean.
