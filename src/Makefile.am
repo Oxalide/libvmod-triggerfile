@@ -13,16 +13,7 @@ libvmod_triggerfile_la_SOURCES = \
 vcc_if.c vcc_if.h: $(VARNISHSRC)/lib/libvmod_std/vmod.py $(top_srcdir)/src/vmod_triggerfile.vcc
 	@PYTHON@ $(VARNISHSRC)/lib/libvmod_std/vmod.py $(top_srcdir)/src/vmod_triggerfile.vcc
 
-VMOD_TESTS = tests/*.vtc
-.PHONY: $(VMOD_TESTS)
-
-tests/*.vtc:
-	$(VARNISHSRC)/bin/varnishtest/varnishtest -Dvarnish_source=$(VARNISHSRC) -Dvarnishd=$(VARNISHSRC)/bin/varnishd/varnishd -Dvmod_topbuild=$(abs_top_builddir) $@
-
-check: $(VMOD_TESTS)
-
 EXTRA_DIST = \
-	vmod_triggerfile.vcc \
-	$(VMOD_TESTS)
+	vmod_triggerfile.vcc
 
 CLEANFILES = $(builddir)/vcc_if.c $(builddir)/vcc_if.h
