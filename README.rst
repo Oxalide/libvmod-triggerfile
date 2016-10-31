@@ -3,11 +3,12 @@ vmod_triggerfile
 ============
 
 ----------------------
-Varnish Example Module
+Varnish triggerfile Module
 ----------------------
 
-:Date: 2015-03-03
-:Version: 1.0
+:Author: Maxime de Roucy
+:Date: 2016-10-31
+:Version: 2
 :Manual section: 3
 
 SYNOPSIS
@@ -18,28 +19,36 @@ import triggerfile;
 DESCRIPTION
 ===========
 
-Example Varnish vmod demonstrating how to write an out-of-tree Varnish vmod.
-
-Implements the traditional Hello World as a vmod.
+Test if a file exist an return a boolean.
 
 FUNCTIONS
 =========
 
-hello
+exist
 -----
 
 Prototype
         ::
 
-                hello(STRING S)
+                exist(STRING S)
 Return value
-	STRING
+	BOOL
 Description
-	Returns "Hello, " prepended to S
-Example
+	Test if a file exist.
+triggerfile
         ::
 
-                set resp.http.hello = triggerfile.hello("World");
+                if (req.url == "/httpprobe") {
+                  if (try-file.exist("/space/out-of-the-pool"))
+                  {
+                    error 404 "KO";
+                  }
+                  else
+                  {
+                    error 200 "OK";
+                  }
+                }
+
 
 INSTALLATION
 ============
@@ -94,20 +103,23 @@ In your VCL you could then use this vmod along the following lines::
 
         import triggerfile;
 
-        sub vcl_deliver {
-                # This sets resp.http.hello to "Hello, World"
-                set resp.http.hello = triggerfile.hello("World");
-        }
+        sub vcl_recv {
+          if (req.url == "/httpprobe") {
+            if (try-file.exist("/space/out-of-the-pool"))
+            {
+              error 404 "KO";
+            }
+            else
+            {
+              error 200 "OK";
+            }
+          }
 
-COMMON PROBLEMS
-===============
+          …
 
-* configure: error: Need varnish.m4 -- see README.rst
+HISTORY
+=======
 
-  Check if ``PKG_CONFIG_PATH`` has been set correctly before calling
-  ``autogen.sh`` and ``configure``
+Lots of sources of this vmod comes from libvmod-example.
 
-* Incompatibilities with different Varnish Cache versions
-
-  Make sure you build this vmod against its correspondent Varnish Cache version.
-  For triggerfile, to build against Varnish Cache 4.0, this vmod must be built from branch 4.0.
+    https://github.com/varnish/libvmod-example
