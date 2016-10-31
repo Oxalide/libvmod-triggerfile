@@ -1,4 +1,4 @@
-Source: libvmod-triggerfile
+Source: libvmod-triggerfile-3.0.7
 Section: web
 Priority: extra
 Maintainer: Varnish Software <support@varnish-software.com>
@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 7), build-essential, python-docutils
 Standards-Version: 3.8.1
 Vcs-Git: git://github.com/varnish/libvmod-triggerfile.git
 
-Package: libvmod-triggerfile
+Package: libvmod-triggerfile-3.0.7
 Architecture: any
 Depends: varnish, ${Varnish:ABI}, ${misc:Depends}, ${shlibs:Depends}
 Description: Triggerfile vmod for Varnish
