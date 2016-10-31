@@ -3,12 +3,12 @@ vmod_triggerfile
 ============
 
 ----------------------
-Varnish Triggerfile Module
+Varnish triggerfile Module
 ----------------------
 
-:Author: Martin Blix Grydeland
-:Date: 2015-03-03
-:Version: 1.0
+:Author: Maxime de Roucy
+:Date: 2016-10-31
+:Version: 2
 :Manual section: 3
 
 SYNOPSIS
@@ -19,41 +19,41 @@ import triggerfile;
 DESCRIPTION
 ===========
 
-Triggerfile Varnish vmod demonstrating how to write an out-of-tree Varnish vmod
-for Varnish 3.0.
-
-Implements the traditional Hello World as a vmod.
+Test if a file exist an return a boolean.
 
 FUNCTIONS
 =========
 
-hello
+exist
 -----
 
 Prototype
         ::
 
-                hello(STRING S)
+                exist(STRING S)
 Return value
-	STRING
+	BOOL
 Description
-	Returns "Hello, " prepended to S
-Triggerfile
+	Test if a file exist.
+triggerfile
         ::
 
-                set resp.http.hello = triggerfile.hello("World");
+                if (req.url == "/httpprobe") {
+                  if (try-file.exist("/space/out-of-the-pool"))
+                  {
+                    error 404 "KO";
+                  }
+                  else
+                  {
+                    error 200 "OK";
+                  }
+                }
+
 
 INSTALLATION
 ============
 
-This is an triggerfile skeleton for developing out-of-tree Varnish
-vmods available from the 3.0 release. It implements the "Hello, World!" 
-as a vmod callback. Not particularly useful in good hello world 
-tradition,but demonstrates how to get the glue around a vmod working.
-
-The source tree is based on autotools to configure the building, and
-does also have the necessary bits in place to do functional unit tests
-using the varnishtest tool.
+The source tree is based on autotools to configure the building.
 
 Usage::
 
@@ -71,24 +71,28 @@ Make targets:
 
 * make - builds the vmod
 * make install - installs your vmod in `VMODDIR`
-* make check - runs the unit tests in ``src/tests/*.vtc``
 
 In your VCL you could then use this vmod along the following lines::
         
         import triggerfile;
 
-        sub vcl_deliver {
-                # This sets resp.http.hello to "Hello, World"
-                set resp.http.hello = triggerfile.hello("World");
-        }
+        sub vcl_recv {
+          if (req.url == "/httpprobe") {
+            if (try-file.exist("/space/out-of-the-pool"))
+            {
+              error 404 "KO";
+            }
+            else
+            {
+              error 200 "OK";
+            }
+          }
+
+          …
 
 HISTORY
 =======
 
-This manual page was released as part of the libvmod-triggerfile package,
-demonstrating how to create an out-of-tree Varnish vmod.
+Lots of sources of this vmod comes from libvmod-example.
 
-For further triggerfiles and inspiration check out the vmod directory:
-
-    https://www.varnish-cache.org/vmods
-
+    https://github.com/varnish/libvmod-example
