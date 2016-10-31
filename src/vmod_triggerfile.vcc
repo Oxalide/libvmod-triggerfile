@@ -1,7 +1,7 @@
 #
-# Copyright YOU (c) 1900.
+# Copyright Maxime de Roucy (c) 2016.
 #
-# (vmodtool requires this format.)
+# maxime.deroucy@oxalide.com
 #
 
 $Module triggerfile 3 Triggerfile VMOD
@@ -9,24 +9,14 @@ $Module triggerfile 3 Triggerfile VMOD
 DESCRIPTION
 ===========
 
-This is the embedded documentation for the triggerfile VMOD. It should
-mention what the vmod is intended to do.
+This is the embedded documentation for the triggerfile VMOD.
+Test if a file exist an return a boolean.
 
-It can span multiple lines and is written in RST format.
-You can even have links and lists in here:
+Based on libvmod-example :
 
-* https://github.com/varnish/libvmod-triggerfile/
-* https://www.varnish-cache.org/
-
-The init-function declared next does not have documentation.
+* https://github.com/varnishcache/libvmod-example
 
 $Event event_function
-$Function STRING info()
+$Function BOOL exist(STRING)
 
-Returns a string set by the last VCL event, demonstrating the use of
-event functions.
-
-$Function STRING hello(STRING)
-
-The different functions provided by the VMOD should also have their own
-embedded documentation. This section is for the hello() function.
+Test if a file exist.
