@@ -1,6 +1,15 @@
 ============
-vmod-triggerfile
+vmod_triggerfile
 ============
+
+----------------------
+Varnish triggerfile Module
+----------------------
+
+:Author: Maxime de Roucy
+:Date: 2016-10-31
+:Version: 2
+:Manual section: 3
 
 SYNOPSIS
 ========
@@ -10,100 +19,80 @@ import triggerfile;
 DESCRIPTION
 ===========
 
-Triggerfile Varnish vmod demonstrating how to write an out-of-tree Varnish vmod.
-
-Implements the traditional Hello World as a vmod.
+Test if a file exist an return a boolean.
 
 FUNCTIONS
 =========
 
-hello
+exist
 -----
 
 Prototype
         ::
 
-                hello(STRING S)
+                exist(STRING S)
 Return value
-	STRING
+	BOOL
 Description
-	Returns "Hello, " prepended to S
-Triggerfile
+	Test if a file exist.
+triggerfile
         ::
 
-                set resp.http.hello = triggerfile.hello("World");
+                if (req.url == "/httpprobe") {
+                  if (try-file.exist("/space/out-of-the-pool"))
+                  {
+                    error 404 "KO";
+                  }
+                  else
+                  {
+                    error 200 "OK";
+                  }
+                }
+
 
 INSTALLATION
 ============
 
-The source tree is based on autotools to configure the building, and
-does also have the necessary bits in place to do functional unit tests
-using the ``varnishtest`` tool.
-
-Building requires the Varnish header files and uses pkg-config to find
-the necessary paths.
+The source tree is based on autotools to configure the building.
 
 Usage::
 
- ./autogen.sh
- ./configure
+ ./configure VARNISHSRC=DIR [VMODDIR=DIR]
 
-If you have installed Varnish to a non-standard directory, call
-``autogen.sh`` and ``configure`` with ``PKG_CONFIG_PATH`` pointing to
-the appropriate path. For instance, when varnishd configure was called
-with ``--prefix=$PREFIX``, use
+`VARNISHSRC` is the directory of the Varnish source tree for which to
+compile your vmod. Both the `VARNISHSRC` and `VARNISHSRC/include`
+will be added to the include search paths for your module.
 
-::
-
- export PKG_CONFIG_PATH=${PREFIX}/lib/pkgconfig
- export ACLOCAL_PATH=${PREFIX}/share/aclocal
-
-The module will inherit its prefix from Varnish, unless you specify a
-different ``--prefix`` when running the ``configure`` script for this
-module.
+Optionally you can also set the vmod install directory by adding
+`VMODDIR=DIR` (defaults to the pkg-config discovered directory from your
+Varnish installation).
 
 Make targets:
 
-* make - builds the vmod.
-* make install - installs your vmod.
-* make check - runs the unit tests in ``src/tests/*.vtc``.
-* make distcheck - run check and prepare a tarball of the vmod.
-
-If you build a dist tarball, you don't need any of the autotools or
-pkg-config. You can build the module simply by running::
-
- ./configure
- make
-
-Installation directories
-------------------------
-
-By default, the vmod ``configure`` script installs the built vmod in the
-directory relevant to the prefix. The vmod installation directory can be
-overridden by passing the ``vmoddir`` variable to ``make install``.
-
-USAGE EXAMPLE
-=============
+* make - builds the vmod
+* make install - installs your vmod in `VMODDIR`
 
 In your VCL you could then use this vmod along the following lines::
-
+        
         import triggerfile;
 
-        sub vcl_deliver {
-                # This sets resp.http.hello to "Hello, World"
-                set resp.http.hello = triggerfile.hello("World");
-        }
+        sub vcl_recv {
+          if (req.url == "/httpprobe") {
+            if (try-file.exist("/space/out-of-the-pool"))
+            {
+              error 404 "KO";
+            }
+            else
+            {
+              error 200 "OK";
+            }
+          }
 
-COMMON PROBLEMS
-===============
+          …
 
-* configure: error: Need varnish.m4 -- see README.rst
+HISTORY
+=======
 
-  Check whether ``PKG_CONFIG_PATH`` and ``ACLOCAL_PATH`` were set correctly
-  before calling ``autogen.sh`` and ``configure``
+Lots of sources of this vmod comes from libvmod-example.
 
-* Incompatibilities with different Varnish Cache versions
-
-  Make sure you build this vmod against its correspondent Varnish Cache version.
-  For instance, to build against Varnish Cache 4.1, this vmod must be built from
-  branch 4.1.
+    https://github.com/varnish/libvmod-example
