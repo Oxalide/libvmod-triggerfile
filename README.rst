@@ -1,16 +1,16 @@
 ============
-vmod-example
+vmod-triggerfile
 ============
 
 SYNOPSIS
 ========
 
-import example;
+import triggerfile;
 
 DESCRIPTION
 ===========
 
-Example Varnish vmod demonstrating how to write an out-of-tree Varnish vmod.
+Triggerfile Varnish vmod demonstrating how to write an out-of-tree Varnish vmod.
 
 Implements the traditional Hello World as a vmod.
 
@@ -28,10 +28,10 @@ Return value
 	STRING
 Description
 	Returns "Hello, " prepended to S
-Example
+Triggerfile
         ::
 
-                set resp.http.hello = example.hello("World");
+                set resp.http.hello = triggerfile.hello("World");
 
 INSTALLATION
 ============
@@ -87,11 +87,11 @@ USAGE EXAMPLE
 
 In your VCL you could then use this vmod along the following lines::
 
-        import example;
+        import triggerfile;
 
         sub vcl_deliver {
                 # This sets resp.http.hello to "Hello, World"
-                set resp.http.hello = example.hello("World");
+                set resp.http.hello = triggerfile.hello("World");
         }
 
 COMMON PROBLEMS
