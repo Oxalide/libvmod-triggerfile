@@ -1,20 +1,20 @@
-Summary: Example VMOD for Varnish
-Name: vmod-example
+Summary: Triggerfile VMOD for Varnish
+Name: vmod-triggerfile
 Version: 0.2
 Release: 1%{?dist}
 License: BSD
 Group: System Environment/Daemons
-Source0: libvmod-example.tar.gz
+Source0: libvmod-triggerfile.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: varnish > 3.0
 BuildRequires: make
 BuildRequires: python-docutils
 
 %description
-Example VMOD
+Triggerfile VMOD
 
 %prep
-%setup -n libvmod-example
+%setup -n libvmod-triggerfile
 
 %build
 # this assumes that VARNISHSRC is defined on the rpmbuild command line, like this:

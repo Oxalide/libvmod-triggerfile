@@ -1,9 +1,9 @@
 ============
-vmod_example
+vmod_triggerfile
 ============
 
 ----------------------
-Varnish Example Module
+Varnish Triggerfile Module
 ----------------------
 
 :Author: Martin Blix Grydeland
@@ -14,12 +14,12 @@ Varnish Example Module
 SYNOPSIS
 ========
 
-import example;
+import triggerfile;
 
 DESCRIPTION
 ===========
 
-Example Varnish vmod demonstrating how to write an out-of-tree Varnish vmod
+Triggerfile Varnish vmod demonstrating how to write an out-of-tree Varnish vmod
 for Varnish 3.0.
 
 Implements the traditional Hello World as a vmod.
@@ -38,15 +38,15 @@ Return value
 	STRING
 Description
 	Returns "Hello, " prepended to S
-Example
+Triggerfile
         ::
 
-                set resp.http.hello = example.hello("World");
+                set resp.http.hello = triggerfile.hello("World");
 
 INSTALLATION
 ============
 
-This is an example skeleton for developing out-of-tree Varnish
+This is an triggerfile skeleton for developing out-of-tree Varnish
 vmods available from the 3.0 release. It implements the "Hello, World!" 
 as a vmod callback. Not particularly useful in good hello world 
 tradition,but demonstrates how to get the glue around a vmod working.
@@ -75,20 +75,20 @@ Make targets:
 
 In your VCL you could then use this vmod along the following lines::
         
-        import example;
+        import triggerfile;
 
         sub vcl_deliver {
                 # This sets resp.http.hello to "Hello, World"
-                set resp.http.hello = example.hello("World");
+                set resp.http.hello = triggerfile.hello("World");
         }
 
 HISTORY
 =======
 
-This manual page was released as part of the libvmod-example package,
+This manual page was released as part of the libvmod-triggerfile package,
 demonstrating how to create an out-of-tree Varnish vmod.
 
-For further examples and inspiration check out the vmod directory:
+For further triggerfiles and inspiration check out the vmod directory:
 
     https://www.varnish-cache.org/vmods
 

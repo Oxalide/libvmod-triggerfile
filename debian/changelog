@@ -1,10 +1,10 @@
-libvmod-example (0.2) unstable; urgency=medium
+libvmod-triggerfile (0.2) unstable; urgency=medium
 
   * Packaging bump, no changes.
 
  -- Lasse Karstensen <lkarsten@varnish-software.com>  Mon, 03 Nov 2014 11:05:13 +0100
 
-libvmod-example (0.1) unstable; urgency=low
+libvmod-triggerfile (0.1) unstable; urgency=low
 
   * First version
 
