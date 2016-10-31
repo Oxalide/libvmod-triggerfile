@@ -1,7 +1,15 @@
 #!/usr/bin/make -f
 export DH_VERBOSE=1
 
+# Extract VMOD_ABI version, this is used for building vmods using the official
+# VMOD API
+VMOD_ABI = $(shell printf '\#include "varnish/vrt.h"\nvarnishabi- VRT_MAJOR_VERSION . VRT_MINOR_VERSION\n' \
+	   | cpp - \
+	   | sed -e '/^varnishabi-/!d' -e 's/U//g' -e 's/ //g')
+
 override_dh_gencontrol:
+	echo "Varnish:ABI=$(VMOD_ABI)" >> debian/libvmod-triggerfile.substvars
+
 	if [ -n "$$DEBIAN_OVERRIDE_BINARY_VERSION" ]; then \
 		dh_gencontrol -- -v$$DEBIAN_OVERRIDE_BINARY_VERSION; \
 	else \
