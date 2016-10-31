@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 /* need vcl.h before vrt.h for vmod_evet_f typedef */
 #include "vcl.h"
