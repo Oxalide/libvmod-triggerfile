@@ -1,5 +1,13 @@
-libvmod-triggerfile (0.1) unstable; urgency=low
+libvmod-triggerfile (2-1~3.2) stable; urgency=low
 
-  * First version
+  * packaging rework
+  * no code modification
+  * 3.2 is the VMOD_ABI version
 
- -- Lasse Karstensen <lasse@varnish-software.com>  Wed, 19 Sep 2012 15:03:00 +0200
+ -- Maxime de Roucy <maxime.deroucy@oxalide.com>  Mon, 31 Oct 2016 18:42:00 +0200
+
+libvmod-triggerfile (1) stable; urgency=low
+
+  * First version (from vmod-example)
+
+ -- Maxime de Roucy <maxime.deroucy@oxalide.com>  Mon, 30 May 2016 23:35:00 +0200
