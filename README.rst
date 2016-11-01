@@ -72,8 +72,33 @@ Make targets:
 * make - builds the vmod
 * make install - installs your vmod in `VMODDIR`
 
+DEBIAN
+======
+
+To build the libvmod-triggerfile Debian package ::
+
+ # apt-get install apt-transport-https curl
+ # curl https://repo.varnish-cache.org/GPG-key.txt | apt-key add -
+ # echo "deb https://repo.varnish-cache.org/debian/ `lsb_release -s -c` varnish-4.1" >> /etc/apt/sources.list
+ # echo "deb-src https://repo.varnish-cache.org/debian/ `lsb_release -s -c` varnish-4.1" >> /etc/apt/sources.list
+ # apt-get update
+ # apt-get build-dep varnish
+ # su - builduser
+ $ mkdir varnish
+ $ cd varnish
+ $ apt-get source varnish=3.0.7-1~wheezy
+ $ debuild -us -uc
+ $ cd ~
+ …
+ $ cd libvmod-triggerfile
+ $ rm -rf .git*
+ $ debuild -e"DEBIAN_VARNISH_SRC=/home/userbuild/varnish/varnish-3.0.7/" -us -uc
+
+USAGE EXAMPLE
+=============
+
 In your VCL you could then use this vmod along the following lines::
-        
+
         import triggerfile;
 
         sub vcl_recv {
