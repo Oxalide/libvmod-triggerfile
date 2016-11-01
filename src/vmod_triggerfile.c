@@ -26,8 +26,8 @@ event_function(VRT_CTX, struct vmod_priv *priv, enum vcl_event_e e)
 	return (0);
 }
 
-unsigned
-vmod_exist(struct sess *sp, const char *name)
+VCL_BOOL
+vmod_exist(VRT_CTX, VCL_STRING name)
 {
 	if(access(name, F_OK) == 0)
 		return 1 /* OK */;
