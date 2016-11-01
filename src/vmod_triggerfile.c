@@ -15,8 +15,8 @@ init_function(const struct vrt_ctx *ctx, struct vmod_priv *priv,
 	return (0);
 }
 
-unsigned
-vmod_exist(struct sess *sp, const char *name)
+VCL_BOOL
+vmod_exist(VRT_CTX, VCL_STRING name)
 {
 	if(access(name, F_OK) == 0)
 		return 1 /* OK */;
