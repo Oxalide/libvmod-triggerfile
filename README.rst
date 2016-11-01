@@ -79,14 +79,15 @@ To build the libvmod-triggerfile Debian package ::
 
  # apt-get install apt-transport-https curl
  # curl https://repo.varnish-cache.org/GPG-key.txt | apt-key add -
- # echo "deb https://repo.varnish-cache.org/debian/ `lsb_release -s -c` varnish-4.1" >> /etc/apt/sources.list
- # echo "deb-src https://repo.varnish-cache.org/debian/ `lsb_release -s -c` varnish-4.1" >> /etc/apt/sources.list
+ # echo "deb https://repo.varnish-cache.org/debian/ `lsb_release -s -c` varnish-3.0" >> /etc/apt/sources.list
+ # echo "deb-src https://repo.varnish-cache.org/debian/ `lsb_release -s -c` varnish-3.0" >> /etc/apt/sources.list
  # apt-get update
- # apt-get build-dep varnish
+ # apt-get build-dep varnish=3.0.7-1~wheezy
  # su - builduser
  $ mkdir varnish
  $ cd varnish
  $ apt-get source varnish=3.0.7-1~wheezy
+ $ cd varnish-3.0.7
  $ debuild -us -uc
  $ cd ~
  …
