@@ -7,6 +7,10 @@ VMOD_ABI = $(shell printf '\#include "varnish/vrt.h"\nvarnishabi- VRT_MAJOR_VERS
 	   | cpp - \
 	   | sed -e '/^varnishabi-/!d' -e 's/U//g' -e 's/ //g')
 
+override_dh_auto_configure:
+	./autogen.sh
+	dh_auto_configure
+
 override_dh_gencontrol:
 	echo "Varnish:ABI=$(VMOD_ABI)" >> debian/libvmod-triggerfile.substvars
 
