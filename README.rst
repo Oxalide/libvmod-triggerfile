@@ -55,25 +55,51 @@ INSTALLATION
 
 The source tree is based on autotools to configure the building.
 
+Building requires the Varnish header files and uses pkg-config to find
+the necessary paths.
+
 Usage::
 
- ./configure VARNISHSRC=DIR [VMODDIR=DIR]
+ ./autogen.sh
+ ./configure
 
-`VARNISHSRC` is the directory of the Varnish source tree for which to
-compile your vmod. Both the `VARNISHSRC` and `VARNISHSRC/include`
-will be added to the include search paths for your module.
+If you have installed Varnish to a non-standard directory, call
+``autogen.sh`` and ``configure`` with ``PKG_CONFIG_PATH`` pointing to
+the appropriate path. For instance, when varnishd configure was called
+with ``--prefix=$PREFIX``, use
 
-Optionally you can also set the vmod install directory by adding
-`VMODDIR=DIR` (defaults to the pkg-config discovered directory from your
-Varnish installation).
+::
+
+ export PKG_CONFIG_PATH=${PREFIX}/lib/pkgconfig
+ export ACLOCAL_PATH=${PREFIX}/share/aclocal
+
+The module will inherit its prefix from Varnish, unless you specify a
+different ``--prefix`` when running the ``configure`` script for this
+module.
 
 Make targets:
 
-* make - builds the vmod
-* make install - installs your vmod in `VMODDIR`
+* make - builds the vmod.
+* make install - installs your vmod.
+
+If you build a dist tarball, you don't need any of the autotools or
+pkg-config. You can build the module simply by running::
+
+ ./configure
+ make
+
+Installation directories
+------------------------
+
+By default, the vmod ``configure`` script installs the built vmod in the
+directory relevant to the prefix. The vmod installation directory can be
+overridden by passing the ``vmoddir`` variable to ``make install``.
+
+USAGE EXAMPLE
+=============
 
 In your VCL you could then use this vmod along the following lines::
-        
+
         import triggerfile;
 
         sub vcl_recv {
