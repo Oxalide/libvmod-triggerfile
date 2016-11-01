@@ -53,9 +53,7 @@ triggerfile
 INSTALLATION
 ============
 
-The source tree is based on autotools to configure the building, and
-does also have the necessary bits in place to do functional unit tests
-using the ``varnishtest`` tool.
+The source tree is based on autotools to configure the building.
 
 Building requires the Varnish header files and uses pkg-config to find
 the necessary paths.
@@ -81,8 +79,6 @@ Make targets:
 
 * make - builds the vmod.
 * make install - installs your vmod.
-* make check - runs the unit tests in ``src/tests/*.vtc``
-* make distcheck - run check and prepare a tarball of the vmod.
 
 Installation directories
 ------------------------
