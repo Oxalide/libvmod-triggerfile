@@ -39,7 +39,7 @@ triggerfile
         ::
 
                 if (req.url == "/httpprobe") {
-                  if (try-file.exist("/space/out-of-the-pool"))
+                  if (triggerfile.exist("/space/out-of-the-pool"))
                   {
                     error 404 "KO";
                   }
@@ -104,7 +104,7 @@ In your VCL you could then use this vmod along the following lines::
 
         sub vcl_recv {
           if (req.url == "/httpprobe") {
-            if (try-file.exist("/space/out-of-the-pool"))
+            if (triggerfile.exist("/space/out-of-the-pool"))
             {
               error 404 "KO";
             }
