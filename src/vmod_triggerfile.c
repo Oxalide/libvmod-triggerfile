@@ -8,13 +8,6 @@
 
 #include "vcc_if.h"
 
-int
-init_function(const struct vrt_ctx *ctx, struct vmod_priv *priv,
-    enum vcl_event_e e)
-{
-	return (0);
-}
-
 VCL_BOOL
 vmod_exist(VRT_CTX, VCL_STRING name)
 {
