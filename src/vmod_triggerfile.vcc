@@ -16,7 +16,6 @@ Based on libvmod-example :
 
 * https://github.com/varnishcache/libvmod-example
 
-$Event event_function
 $Function BOOL exist(STRING)
 
 Test if a file exist.

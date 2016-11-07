@@ -12,20 +12,6 @@
 #include "vtim.h"
 #include "vcc_triggerfile_if.h"
 
-/*
- * handle vmod internal state, vmod init/fini and/or varnish callback
- * (un)registration here.
- *
- * this vmod doesn't have any state, so there is nothing to be done
- *
- */
-
-int __match_proto__(vmod_event_f)
-event_function(VRT_CTX, struct vmod_priv *priv, enum vcl_event_e e)
-{
-	return (0);
-}
-
 VCL_BOOL
 vmod_exist(VRT_CTX, VCL_STRING name)
 {
